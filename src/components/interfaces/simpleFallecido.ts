@@ -11,4 +11,5 @@ export interface SimpleFallecido {
   createdAt?: string;
   updatedAt?: string;
   sepulturaId?: number | null;
+  favorito: number
 }

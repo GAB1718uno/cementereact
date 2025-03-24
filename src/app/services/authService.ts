@@ -45,6 +45,15 @@ const AuthService = {
           email: data.email!,
           avatar: data.avatar!,
         };
+
+        /* const userData = {
+          usuario: data.name!,
+          uid: data.uid!,
+          email: data.email!,
+          avatar: data.avatar!,
+        };
+        localStorage.setItem("user", JSON.stringify(userData)); // Asegúrate de usar JSON.stringify
+   */
         return true;
       }
   
@@ -58,6 +67,7 @@ const AuthService = {
   async validarToken(): Promise<boolean> {
     const token = localStorage.getItem("token");
     if (!token) return false;
+    console.log("Paso la PRUEBA")
 
     try {
       const res = await fetch(`${BASE_URL}/usuarios/renuevo`, {
@@ -74,6 +84,18 @@ const AuthService = {
           email: data.email!,
           avatar: data.avatar!,
         };
+
+        // Guardar los datos del usuario en el localStorage como un objeto JSON
+      const userData = {
+        usuario: data.name!,
+        uid: data.uid!,
+        email: data.email!,
+        avatar: data.avatar!,
+      };
+      localStorage.setItem("user", JSON.stringify(userData)); // Asegúrate de usar JSON.stringify
+
+
+
         return true;
       }
       return false;

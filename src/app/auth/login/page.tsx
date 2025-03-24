@@ -2,10 +2,11 @@
 import Image from "next/image"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import authService from '@/app/services/authService';
 import cementerio from "@/assets/images/cementerio.png"
 import {useRouter} from "next/navigation"
+import AuthService from "@/app/services/authService";
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ export default function LoginPage() {
         // Redireccionar o actualizar el estado global de autenticación
         console.log({success})
         console.log('Login exitoso');
+
         router.push("/dashboard/main");
       }
         
@@ -29,6 +31,13 @@ export default function LoginPage() {
     }
  
   }
+
+   useEffect(() => {
+      // Limpiar el localStorage al cargar la aplicación
+      localStorage.removeItem("token");
+      AuthService.usuario = null;
+      console.log("LocalStorage limpiado al inicio. Se ha cargado");
+    }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -69,26 +78,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-
-  /* return (
-    <div>
-      <ToastContainer />
-      <h1>Iniciar Sesión</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Acceder</button>
-      </form>
-    </div>
-  ); */
 }

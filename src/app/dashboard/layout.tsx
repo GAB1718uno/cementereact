@@ -1,15 +1,27 @@
 "use client"; // Necesario para usar el contexto
 
-import { useSidebar } from "@/components/SidebarContext";
+import { useSidebar } from "@/components/nivelApp/SidebarContext";
 import { Sidebar } from "../../components";
-import SidebarToggle from "@/components/SidebarToogle";
+import { useEffect } from "react";
+import AuthService from "../services/authService";
+import SidebarToggle from "@/components/nivelApp/SidebarToogle";
+
+
+
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+ 
+
+
+
   const { isOpen } = useSidebar(); // Usa el estado del sidebar
+
+  
 
   return (
     <div className="overflow-y-scroll w-screen h-screen antialiased text-slate-700 selection:bg-blue-600 selection:text-white">

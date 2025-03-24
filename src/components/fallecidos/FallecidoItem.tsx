@@ -23,6 +23,7 @@ const FallecidoItem = ({ fallecidos }: Props) => {
     createdAt,
     updatedAt,
     sepulturaId,
+    favorito
   } = fallecidos;
 
   let nacioVacio = false;
@@ -63,6 +64,7 @@ const FallecidoItem = ({ fallecidos }: Props) => {
         </div>
       </div>
       <span>Sepultado en: </span>
+      <span>{favorito}</span>
       <Image
         //Punto de interrogación para saltarse el aviso (warning) de error de type
         src={url2!}

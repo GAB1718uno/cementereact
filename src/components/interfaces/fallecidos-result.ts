@@ -17,4 +17,5 @@ export interface Row {
   createdAt: string;
   updatedAt: string;
   sepulturaId: number | null;
+  favorito: number
 }

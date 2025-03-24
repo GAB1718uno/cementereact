@@ -1,6 +1,6 @@
 "use client";
-import { useSidebar } from "./SidebarContext";
 import { IoMenu } from "react-icons/io5";
+import { useSidebar } from "./SidebarContext";
 
 export const SidebarToggle: React.FC = () => {
   const { toggleSidebar } = useSidebar();

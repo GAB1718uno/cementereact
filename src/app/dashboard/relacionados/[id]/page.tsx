@@ -1,159 +1,97 @@
+"use client"
+import { useState, useEffect } from "react";
 import { SimpleFallecido } from "@/fallecidos";
 import Image from "next/image";
-import { format } from "date-fns";
-import { FaCross } from "react-icons/fa";
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { TiStarburst } from "react-icons/ti";
-import FallecidoRelacionado from "@/fallecidos/components/FallecidoRelacionado";
-import { ComentarioImg } from "@/comentarios/comentarioImg";
-
-// Asi es como se formatea fecha en React facilmente
-/* var date = new Date("2016-01-30");
-var formattedDate = format(date, "dd-MM-yyyy");
-console.log(formattedDate); */
+import { FallecidoGrid } from "@/components/fallecidos/FallecidoGrid";
 
 interface Props {
   params: { 
-    id: any;
-     sepult: any;
-    sepulturaId: any };
+    id: string;
+    sepult: string;
+    sepulturaId: number;
+  };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const fallecido = await obtenerFallecidoPorId(params.id);
+export default function RelacionadosPage({ params }: Props) {
+  const [fallecidoInd, setFallecidoInd] = useState<SimpleFallecido | null>(null);
+  const [fallecidosRelacionados, setFallecidosRelacionados] = useState<SimpleFallecido[]>([]);
 
-  try {
-    return {
-      title: `${fallecido.name}${" "}${fallecido.apellidos}`,
-      description: `Esta página está dedicada en memoria de ${
-        fallecido.name
-      }${" "}${fallecido.apellidos}`,
-    };
-  } catch (error) {
-    return {
-      title: "Fallecido no encontrado",
-      description: "No se encuentra fallecido con las especificaciones dadas",
-    };
-  }
-}
-
-const obtenerFallecidoPorId = async (id: string): Promise<SimpleFallecido> => {
-  try {
-    const fallecidoIndividual = await fetch(
-      `http://167.71.36.17/api/muertos/${id}`,
-      {
+  // Función para obtener el fallecido principal
+  const obtenerFallecidoPorId = async (id: string): Promise<SimpleFallecido> => {
+    try {
+      const res = await fetch(`http://localhost:4000/api/muertos/${id}`, {
         cache: "force-cache",
-        /* next: {
-          revalidate: 600,
-        }, */
-      }
-    ).then((response) => response.json());
+      });
+      const data = await res.json();
+      console.log("Fallecido:", data);
+      return data;
+    } catch (error) {
+      return notFound();
+    }
+  };
 
-    console.log(fallecidoIndividual);
-
-    return fallecidoIndividual;
-  } catch (error) {
-    return notFound();
-  }
-};
-
-const obtenerFallecidosRelacionados = async (id: any, sepult: any, sepulturaId: any): Promise<SimpleFallecido[]> => {
-  try {
-    const fallecidosRelacionados = await fetch(
-      `http://167.71.36.17/api/muertos/${id}/${sepult}/${sepulturaId}`,
-      {
+  // Función para obtener fallecidos relacionados
+  const obtenerFallecidosRelacionados = async (
+    id: string,
+    sepult: string,
+    sepulturaId: number
+  ): Promise<SimpleFallecido[]> => {
+    try {
+      const res = await fetch(`http://localhost:4000/api/muertos/${id}/${sepult}/${sepulturaId}`, {
         cache: "force-cache",
-        /* next: {
-          revalidate: 600,
-        }, */
+      });
+      const data = await res.json();
+      console.log("Relacionados:", data);
+      return data;
+    } catch (error) {
+      return notFound();
+    }
+  };
+
+  // Cargar datos al montar el componente
+  useEffect(() => {
+    async function fetchData() {
+      // Obtener el fallecido principal
+      const dataFallecido = await obtenerFallecidoPorId(params.id);
+      setFallecidoInd(dataFallecido);
+
+      // Verificar que los valores necesarios estén definidos
+      if (dataFallecido && dataFallecido.id && dataFallecido.sepult && dataFallecido.sepulturaId) {
+        // Obtener los relacionados y filtrar para excluir el fallecido actual
+        const dataRelacionados = await obtenerFallecidosRelacionados(
+          dataFallecido.id.toString(),
+          dataFallecido.sepult,
+          dataFallecido.sepulturaId
+        );
+        const filtrados = dataRelacionados.filter(f => f.id !== dataFallecido.id);
+        setFallecidosRelacionados(filtrados);
+      } else {
+        console.error("Datos del fallecido principal incompletos");
       }
-    ).then((response) => response.json());
+    }
+    fetchData();
+  }, [params.id, params.sepult, params.sepulturaId]);
 
-    console.log(fallecidosRelacionados);
+  // Callback para manejar el toggle de favorito en los relacionados
+  const handleToggleFavorite = (id: number, newFavorite: boolean) => {
+    console.log(`Toggle favorite en relacionado con id: ${id}, nuevo valor: ${newFavorite}`);
+    if (!newFavorite) {
+      setFallecidosRelacionados(prev => prev.filter(f => f.id !== id));
+    }
+    // Aquí se podría agregar más lógica, por ejemplo, actualizar el backend o notificar al usuario.
+  };
 
-    return fallecidosRelacionados;
-  } catch (error) {
-    return notFound();
-  }
-};
-
-export default async function RelacionadosPage({ params }: Props)
-{
-  
-  const fallecidoInd = await obtenerFallecidoPorId(params.id);
-  /* console.log(fallecidoInd);
-  
-  console.log(fallecidoInd.url); */
-  
-  
-  const {
-    id,
-    name,
-    apellidos,
-    nacio,
-    fallecio,
-    mote,
-    url,
-    url2,
-    sepult,
-    createdAt,
-    updatedAt,
-    sepulturaId,
-  } = fallecidoInd;
-  
-  let nacioVacio = false;
-  
-  if (nacio === "") {
-    nacioVacio = true;
-  }
-  
-  console.log(url);
-  
-  
-  const fallecidosRelacionadosCompleto = await obtenerFallecidosRelacionados(id, sepult, sepulturaId)
-  const fallecidosRelacionados = fallecidosRelacionadosCompleto.filter(data => data.id != fallecidoInd.id)
-  console.log(fallecidosRelacionados)
-  
   return (
-<div className=" flex flex-row-reverse md:mt-2 lg:mt-0 border-t-violet-950 border-double">
-              {
-                fallecidosRelacionados.length > 0 ?
-                <span className="z-0 ml-px inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#E0E5F2] text-xs text-navy-700 ">
-                  {"+"} {
-                         fallecidosRelacionados.length-1
-                  }
-              </span>
-
-: <span></span>
-
-              } 
-
-                 {
-                  fallecidosRelacionados.length > 0 ? (
-                 <span className="z-10 -mr-3 h-8 w-8 rounded-full border-2 border-white">
-                  {
-                  <Image
-                  key={fallecidosRelacionados[0].id}
-                  src={fallecidosRelacionados[0].url || '' }
-                  className="h-full w-full rounded-full object-cover"
-                  alt=""
-                  width={50}
-                  height={50}
-                  priority={false}
-                  />
-                  }
-
-                  {/* <ComentarioImg fallecidos={fallecidosRelacionados}/> */}
-                 </span>
-
-                  ): <span></span>
-                 }
-
-                
-                
-                 
-                </div>
-
+    <div>
+      {fallecidosRelacionados.length > 0 ? (
+        <FallecidoGrid 
+          fallecidos={fallecidosRelacionados} 
+          onToggleFavorite={handleToggleFavorite} 
+        />
+      ) : (
+        <p>No hay fallecidos relacionados.</p>
+      )}
+    </div>
   );
 }

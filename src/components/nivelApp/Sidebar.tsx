@@ -3,6 +3,7 @@ import Image from "next/image";
 import { IoAddCircle, IoAppsSharp, IoAt, IoFootball } from "react-icons/io5";
 import { SidebarMenuItem } from "./SidebarMenuItem";
 import { useSidebar } from "./SidebarContext";
+import UserHeader from "./userHeader";
 
 const menuItems = [
   {
@@ -12,7 +13,7 @@ const menuItems = [
     subTitle: "Visión Global de los servicios",
   },
   {
-    path: "/dashboard/counter",
+    path: "/dashboard/favoritos",
     icon: <IoAddCircle size={50} />,
     title: "Favoritos",
     subTitle: "Selección personal",
@@ -60,8 +61,11 @@ export const Sidebar: React.FC = () => {
           Administra tus acciones y actividades
         </p>
       </div>
+
+      {/* Aqui los datos del usuario logueado */}
+      <UserHeader />
   
-      <div id="profile" className="px-6 py-5">
+      {/* <div id="profile" className="px-6 py-5">
         <p className="text-slate-500 pb-2">Bienvenido de vuelta,</p>
         <a href="#" className="inline-flex space-x-2 items-center" onClick={HandleMenuClick}>
           <Image
@@ -76,7 +80,7 @@ export const Sidebar: React.FC = () => {
             Gilson Albino Barbosa
           </span>
         </a>
-      </div>
+      </div> */}
   
       <div id="nav" className="w-full px-3">
         {menuItems.map((menuItemsMapeado) => (

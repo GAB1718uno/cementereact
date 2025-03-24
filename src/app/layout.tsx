@@ -25,7 +25,7 @@ export default function RootLayout({
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SidebarProvider } from "@/components/SidebarContext"; // Importa tu contexto
+import { SidebarProvider } from "@/components/nivelApp/SidebarContext"; // Importa tu contexto
 
 const inter = Inter({ subsets: ["latin"] });
 

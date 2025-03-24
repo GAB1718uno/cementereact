@@ -1,5 +1,5 @@
 "Use Client"
-import CapturarLápida from "@/components/recogeDatosLapida";
+import CapturarLápida from "@/components/nivelApp/recogeDatosLapida";
 import columns2 from '../../../assets/images/12columns2.svg'
 import Image from 'next/image';
 
