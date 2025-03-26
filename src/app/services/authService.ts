@@ -111,4 +111,44 @@ const AuthService = {
   },
 };
 
+export async function registerUser(
+  usuario: string,
+  password: string,
+  email: string,
+  rol: string,
+  estado: number
+) {
+  const url = "http://localhost:4000/api/usuarios/nuevo"
+  //const url = `${process.env.NEXT_PUBLIC_API_URL}/usuarios/nuevo`;
+  const body = { usuario, password, email, rol, estado };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log("La response " + response);
+      
+      // Guardamos el token en localStorage
+      localStorage.setItem("token", data.token);
+      // Opcional: actualiza un contexto global o estado con la información del usuario
+      return data;
+    } else {
+      throw new Error(data.msg || "Error al registrar usuario");
+    }
+  } catch (error: any) {
+    console.error("Error en registerUser:", error);
+    return { error: error.message };
+  }
+}
+
+
+
+
 export default AuthService

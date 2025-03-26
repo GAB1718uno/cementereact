@@ -21,7 +21,7 @@ const FallecidoRelacionadoWrapper = ({ relacionados }: Props) => {
   return (
     <FallecidoRelacionado
       relacionados={fallecidos}
-      onToggleFavorite={handleToggleFavorite}
+      onToggleFavorite={handleToggleFavorite} setFallecidos={setFallecidos}
     />
   );
 };

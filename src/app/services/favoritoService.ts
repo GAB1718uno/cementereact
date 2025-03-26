@@ -1,5 +1,5 @@
 // services/favoritesService.js
-const API_URL = 'http://localhost:5000/favorites';
+const API_URL = 'http://localhost:4000/favorites';
 const userId = localStorage.getItem("userId");
 
 export const getFavorites = async (/* userId */) => {

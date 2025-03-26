@@ -37,7 +37,7 @@ const obtenerFallecidoPorId = async (id: string): Promise<SimpleFallecido> => {
     const fallecidoIndividual = await fetch(
       `http://localhost:4000/api/muertos/${id}`,
       {
-        cache: "force-cache",
+        cache: "no-store",
       }
     ).then((response) => response.json());
 
@@ -57,7 +57,7 @@ const obtenerFallecidosRelacionados = async (
     const fallecidosRelacionados = await fetch(
       `http://localhost:4000/api/muertos/${id}/${sepult}/${sepulturaId}`,
       {
-        cache: "force-cache",
+        cache: "no-store",
       }
     ).then((response) => response.json());
 

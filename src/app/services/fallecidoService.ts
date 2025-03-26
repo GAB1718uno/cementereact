@@ -1,4 +1,24 @@
 import { SimpleFallecido } from "@/components/interfaces/simpleFallecido";
+// src/services/fallecidos.ts
+import { fetchWithAuth } from './apiService';
+
+export const agregarFallecido = async (formData: FormData) => {
+  try {
+    const res = await fetchWithAuth('/muertos', {
+      method: 'POST',
+      body: formData,
+      // No necesitas headers para FormData (fetch lo maneja automáticamente)
+    });
+
+    if (!res.ok) throw new Error('Error en la respuesta del servidor');
+    return await res.json();
+  } catch (error) {
+    console.error('Error al agregar fallecido:', error);
+    throw error;
+  }
+};
+
+
 
 export const obtenerFallecidoPorApellidoYNombre = async (
     nombre: string,
@@ -8,7 +28,7 @@ export const obtenerFallecidoPorApellidoYNombre = async (
       // Asegúrate de que tanto 'nombre' como 'apellidos' tengan valores válidos.
       const url = `http://localhost:4000/api/muertos/busqueda/${encodeURIComponent(nombre)}/${encodeURIComponent(apellidos)}`;
       const response = await fetch(url, {
-        cache: "force-cache",
+        cache: "no-store",
       });
       if (!response.ok) {
         console.error("Error en la respuesta de la API:", response.statusText);
@@ -34,7 +54,7 @@ export const obtenerFallecidos = async (
 
     // Realiza la solicitud a la API
     const response = await fetch(url, {
-      cache: "force-cache",
+      cache: "no-store",
     });
 
     // Verifica si la respuesta es exitosa

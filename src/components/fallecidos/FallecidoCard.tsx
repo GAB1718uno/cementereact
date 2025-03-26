@@ -7,9 +7,10 @@ import { SimpleFallecido } from "../interfaces/simpleFallecido";
 interface Props {
   fallecidos: SimpleFallecido;
   onToggleFavorite: (id: number, newFavorite: boolean) => void;
+  onDelete: (id: number) => void; // Nueva prop
 }
 
-export const FallecidoCard = ({ fallecidos, onToggleFavorite }: Props) => {
+export const FallecidoCard = ({ fallecidos, onToggleFavorite, onDelete }: Props) => {
   const { name, apellidos, url, id, favorito } = fallecidos;
 
   const handleToggleFavorite = () => {
@@ -53,6 +54,9 @@ export const FallecidoCard = ({ fallecidos, onToggleFavorite }: Props) => {
           >
             Ver más...
           </a>
+        <button onClick={() => onDelete(fallecidos.id)} className="bg-red-500 text-white px-2 py-1 rounded">
+  🗑 Eliminar
+</button>
         </div>
       </div>
     </div>

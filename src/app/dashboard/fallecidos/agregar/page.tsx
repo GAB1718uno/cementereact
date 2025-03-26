@@ -4,8 +4,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { buscarSepulturas } from '@/app/services/sepulturaService';
+import { agregarFallecido } from '@/app/services/fallecidoService';
 
-// Esquema de validación optimizado
+// Esquema de validación
 const schema = z.object({
   name: z.string().min(1, 'El nombre es obligatorio'),
   apellidos: z.string().min(1, 'Los apellidos son obligatorios'),
@@ -15,7 +17,7 @@ const schema = z.object({
   url: z.string().optional(),
   url2: z.string().optional(),
   sepult: z.string().min(1, 'La sepultura es obligatoria'),
-  imagen: z.instanceof(File, { message: 'Es obligatorio subir una imagen' }),
+  file: z.any(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -35,58 +37,53 @@ const AgregarFallecido: React.FC = () => {
 
   const termino = watch('sepult') || '';
 
-  // Debounce para evitar múltiples llamadas a la API en poco tiempo
+  // Debounce para buscar sepulturas
   useEffect(() => {
     if (termino.length > 2) {
-      const timeout = setTimeout(() => buscarSepulturas(termino), 300);
+      const timeout = setTimeout(() => {
+        buscarSepulturasHandler(termino);
+      }, 300);
       return () => clearTimeout(timeout);
     }
   }, [termino]);
 
-  const urlBusqueda = `http://localhost:4000/api/sepulturas/busqueda/${termino}`
-  console.log(urlBusqueda)
-
-
-  const buscarSepulturas = async (termino: string) => {
+  const buscarSepulturasHandler = async (termino: string) => {
     try {
-      const res = await fetch(urlBusqueda);
-      console.log(res)
-      const data = await res.json();
-      console.log(data)
+      const data = await buscarSepulturas(termino);
       setSepulturasSugeridas(data);
     } catch (error) {
       console.error('Error al buscar sepulturas:', error);
+      setSepulturasSugeridas([]);
     }
   };
 
   const seleccionarSepultura = (sepultura: string) => {
     setValue('sepult', sepultura);
-    setSepulturasSugeridas([]); // Ocultar sugerencias
+    setSepulturasSugeridas([]);
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     setIsLoading(true);
-
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => formData.append(key, value as string));
-
-    // Construye la URL 
-    const url = `http://localhost:4000/api/muertos}`;
-    console.log("URL de la solicitud:", url); // Depura la URL
-
-
+    
     try {
-      const res = await fetch(url, {
-        method: 'POST',
-        body: formData,
+      const formData = new FormData();
+      
+      // Agregar campos al FormData
+      Object.entries(data).forEach(([key, value]) => {
+        if (key !== "file" && value !== undefined) {
+          formData.append(key, String(value));
+        }
       });
 
-      if (res.ok) {
-        alert('Fallecido agregado con éxito');
-        router.push('/fallecidos');
-      } else {
-        throw new Error('Error en la respuesta del servidor');
+      // Agregar archivo si existe
+      if (data.file?.[0]) {
+        formData.append('file', data.file[0]);
       }
+
+      await agregarFallecido(formData);
+      
+      alert('Fallecido agregado con éxito');
+      router.push('/');
     } catch (error) {
       console.error('Error al agregar fallecido:', error);
       alert('Hubo un error al agregar el fallecido');
@@ -113,52 +110,65 @@ const AgregarFallecido: React.FC = () => {
           {errors.apellidos && <p className="text-red-500 text-sm">{errors.apellidos.message}</p>}
         </div>
 
-        {/* Fecha de nacimiento */}
-        <div>
-          <label className="block text-sm font-medium">Fecha de Nacimiento</label>
-          <input type="date" {...register('nacio')} className="input" />
-          {errors.nacio && <p className="text-red-500 text-sm">{errors.nacio.message}</p>}
+        {/* Fechas */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium">Nacimiento</label>
+            <input type="date" {...register('nacio')} className="input" />
+            {errors.nacio && <p className="text-red-500 text-sm">{errors.nacio.message}</p>}
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Fallecimiento</label>
+            <input type="date" {...register('fallecio')} className="input" />
+            {errors.fallecio && <p className="text-red-500 text-sm">{errors.fallecio.message}</p>}
+          </div>
         </div>
 
-        {/* Fecha de fallecimiento */}
-        <div>
-          <label className="block text-sm font-medium">Fecha de Fallecimiento</label>
-          <input type="date" {...register('fallecio')} className="input" />
-          {errors.fallecio && <p className="text-red-500 text-sm">{errors.fallecio.message}</p>}
+        {/* Sepultura con autocompletado */}
+        <div className="relative">
+          <label className="block text-sm font-medium">Sepultura</label>
+          <input {...register('sepult')} className="input w-full" />
+          {errors.sepult && <p className="text-red-500 text-sm">{errors.sepult.message}</p>}
+          
+          {sepulturasSugeridas.length > 0 && (
+            <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-auto">
+              {sepulturasSugeridas.map((s: any, index) => (
+                <li
+                  key={index}
+                  onClick={() => seleccionarSepultura(`${s.calle}, ${s.numero}`)}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  {s.calle}, {s.numero}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-
-       {/* Sepultura con sugerencias */}
-<div>
-  <label className="block text-sm font-medium">Sepultura</label>
-  <input {...register('sepult')} className="input" />
-  {errors.sepult && <p className="text-red-500 text-sm">{errors.sepult.message}</p>}
-  {sepulturasSugeridas.length > 0 && (
-    <ul className="bg-gray-100 border p-2 rounded mt-2">
-      {sepulturasSugeridas.map((s:any, index) => (
-        <li
-          key={index}
-          onClick={() => seleccionarSepultura(`${s.calle}, ${s.numero}`)} // Asegúrate de concatenar la información que necesitas mostrar
-          className="cursor-pointer py-1 px-2 hover:bg-blue-100"
-        >
-          {s.calle}, {s.numero} {/* Renderiza solo las propiedades que quieras mostrar */}
-        </li>
-      ))}
-    </ul>
-  )}
-</div>
 
         {/* Imagen */}
         <div>
           <label className="block text-sm font-medium">Imagen</label>
-          <input type="file" {...register('imagen')} className="input" />
-          {errors.imagen && <p className="text-red-500 text-sm">{errors.imagen.message}</p>}
+          <input
+            type="file"
+            {...register('file')}
+            accept="image/*"
+            className="block w-full text-sm text-gray-500
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-md file:border-0
+              file:text-sm file:font-semibold
+              file:bg-blue-50 file:text-blue-700
+              hover:file:bg-blue-100"
+          />
+          {errors.file && (
+            <p className="text-red-500 text-sm">La imagen es requerida</p>
+          )}
         </div>
 
-        {/* Botón */}
+        {/* Botón de submit */}
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className={`px-4 py-2 rounded text-white ${isLoading ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'}`}
         >
           {isLoading ? 'Guardando...' : 'Agregar Fallecido'}
         </button>

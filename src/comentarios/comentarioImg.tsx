@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image"
-import { SimpleFallecido } from '@/fallecidos';
+import { SimpleFallecido } from '@/components'
 
 interface Props {
   fallecidos : SimpleFallecido[]
