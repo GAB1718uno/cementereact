@@ -1,16 +1,16 @@
 "use client"
 import Image from "next/image";
 import { FavoritoButton } from "./FavoritoButton";
-import RelacionadosPage from "@/app/dashboard/relacionados/[id]/page";
 import { SimpleFallecido } from "../interfaces/simpleFallecido";
 
 interface Props {
   fallecidos: SimpleFallecido;
   onToggleFavorite: (id: number, newFavorite: boolean) => void;
   onDelete: (id: number) => void; // Nueva prop
+  allowDelete?: boolean;
 }
 
-export const FallecidoCard = ({ fallecidos, onToggleFavorite, onDelete }: Props) => {
+export const FallecidoCard = ({ fallecidos, onToggleFavorite, onDelete, allowDelete=false }: Props) => {
   const { name, apellidos, url, id, favorito } = fallecidos;
 
   const handleToggleFavorite = () => {
@@ -54,7 +54,13 @@ export const FallecidoCard = ({ fallecidos, onToggleFavorite, onDelete }: Props)
           >
             Ver más...
           </a>
-        <button onClick={() => onDelete(fallecidos.id)} className="bg-red-500 text-white px-2 py-1 rounded">
+          <button 
+  onClick={() => onDelete(fallecidos.id)} 
+  disabled={!allowDelete}
+  className={`bg-red-500 text-white px-2 py-1 rounded ${
+    !allowDelete ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-600'
+  }`}
+>
   🗑 Eliminar
 </button>
         </div>

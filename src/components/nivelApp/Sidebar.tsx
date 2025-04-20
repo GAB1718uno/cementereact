@@ -19,10 +19,10 @@ const menuItems = [
     subTitle: "Selección personal",
   },
   {
-    path: "/dashboard/reducciones",
+    path: "/dashboard/sepulturas",
     icon: <IoAt size={50} />,
-    title: "Servicios",
-    subTitle: "Reducciones, traslados, etc",
+    title: "Sepulturas",
+    subTitle: "Ubicación, fallecidos en la misma",
   },
   {
     path: "/dashboard/fallecidos",

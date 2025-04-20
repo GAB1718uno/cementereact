@@ -1,9 +1,9 @@
 "use client"
-import { useState, useEffect } from "react";
-import { SimpleFallecido } from "@/fallecidos";
+import { useState, useEffect, SetStateAction } from "react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { FallecidoGrid } from "@/components/fallecidos/FallecidoGrid";
+import { SimpleFallecido } from "@/components";
 
 interface Props {
   params: { 
@@ -86,9 +86,10 @@ export default function RelacionadosPage({ params }: Props) {
     <div>
       {fallecidosRelacionados.length > 0 ? (
         <FallecidoGrid 
-          fallecidos={fallecidosRelacionados} 
-          onToggleFavorite={handleToggleFavorite} 
-        />
+          fallecidos={fallecidosRelacionados}
+          onToggleFavorite={handleToggleFavorite} setFallecidos={function (value: SetStateAction<SimpleFallecido[]>): void {
+            throw new Error("Function not implemented.");
+          } }        />
       ) : (
         <p>No hay fallecidos relacionados.</p>
       )}

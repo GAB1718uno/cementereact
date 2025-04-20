@@ -51,15 +51,26 @@ const AgregarFallecido: React.FC = () => {
     try {
       const data = await buscarSepulturas(termino);
       setSepulturasSugeridas(data);
+      console.log(data);
+      
     } catch (error) {
       console.error('Error al buscar sepulturas:', error);
       setSepulturasSugeridas([]);
     }
   };
 
-  const seleccionarSepultura = (sepultura: string) => {
-    setValue('sepult', sepultura);
-    setSepulturasSugeridas([]);
+  const seleccionarSepultura = (sepultura: any) => {
+    console.log(sepultura)
+    setValue('sepult', `${sepultura.calle}, ${sepultura.numero}`);
+    
+     // Asignar avatarUrl a url2 si existe
+  if (sepultura.avatar) {
+    setValue('url2', sepultura.avatar);
+  } else {
+    setValue('url2', '');
+  }
+    
+      setSepulturasSugeridas([]);
   };
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -131,18 +142,18 @@ const AgregarFallecido: React.FC = () => {
           {errors.sepult && <p className="text-red-500 text-sm">{errors.sepult.message}</p>}
           
           {sepulturasSugeridas.length > 0 && (
-            <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-auto">
-              {sepulturasSugeridas.map((s: any, index) => (
-                <li
-                  key={index}
-                  onClick={() => seleccionarSepultura(`${s.calle}, ${s.numero}`)}
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  {s.calle}, {s.numero}
-                </li>
-              ))}
-            </ul>
-          )}
+  <ul className="absolute z-10 w-full bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-60 overflow-auto">
+    {sepulturasSugeridas.map((s: any, index) => (
+      <li
+        key={index}
+        onClick={() => seleccionarSepultura(s)}
+        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+      >
+        {s.calle}, {s.numero}
+      </li>
+    ))}
+  </ul>
+)}
         </div>
 
         {/* Imagen */}

@@ -29,6 +29,12 @@ export const FavoritoButton = ({ fallecidoId, initialFavorite, onToggleFavorite 
     }
   }, []);
 
+ /*  tippy(element, {
+    plugins: [followCursor], // Si es un plugin
+    followCursor: true,      // Si es una opción directa
+    // ...
+  }); */
+
   const toggleFavorito = async () => {
     const newFavorito = !isFavorito;
     setIsFavorito(newFavorito);

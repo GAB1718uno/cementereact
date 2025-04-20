@@ -1,8 +1,6 @@
 import React from 'react'
 import { SimpleFallecido } from '../interfaces/simpleFallecido';
 import { FallecidoGrid } from './FallecidoGrid';
-import Image from 'next/image';
-import { ComentarioImg } from '@/comentarios/comentarioImg';
 
 
 interface Props {

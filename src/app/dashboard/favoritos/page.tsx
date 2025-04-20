@@ -28,6 +28,9 @@ export default function FavoritesPage() {
     obtenerFavoritos().then(setFavorites);
   }, []);
 
+  //Aqui no se borra los fallecidos
+  const handleDelete = () => {}
+
   const handleToggleFavorite = (id: number, newFavorite: boolean) => {
     if (!newFavorite) {
       setFavorites((prev) => prev.filter((f) => f.id !== id));
@@ -42,7 +45,7 @@ export default function FavoritesPage() {
           <p>No tienes favoritos aún.</p>
         ) : (
           favorites.map((fav) => (
-            <FallecidoCard key={fav.id} fallecidos={fav} onToggleFavorite={handleToggleFavorite} />
+            <FallecidoCard key={fav.id} fallecidos={fav} onToggleFavorite={handleToggleFavorite} onDelete={handleDelete}/>
           ))
         )}
       </div>
