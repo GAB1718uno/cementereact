@@ -30,4 +30,11 @@ const nextConfig = {
   transpilePackages: ['react-map-gl'], // Añade esta línea
 };
 
+/* module.exports = {
+  experimental: {
+    css: true,
+  },
+};
+ */
 export default nextConfig;
+

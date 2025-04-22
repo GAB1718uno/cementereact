@@ -3,7 +3,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Map, { MapLayerMouseEvent, Source, Layer } from 'react-map-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "../../../../node_modules/mapbox-gl/dist/mapbox-gl.css"
+//import '../../../ mapbox-gl/dist/mapbox-gl.css';
 
 interface GraveFeatureProperties {
   fid: number;

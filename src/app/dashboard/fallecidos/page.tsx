@@ -9,20 +9,23 @@ export default function FallecidosPage() {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1); // Estado para la paginación
 
-  const cargarFallecidos = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await obtenerFallecidos(10, page); // Se cargan 10 por página
-      setFallecidos(data);
-    } catch (err) {
-      setError("Error al obtener la lista de fallecidos.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   useEffect(() => {
+
+    const cargarFallecidos = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await obtenerFallecidos(10, page); // Se cargan 10 por página
+        setFallecidos(data);
+      } catch (err) {
+        setError("Error al obtener la lista de fallecidos.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     cargarFallecidos();
   }, [page]); // Se ejecuta cuando cambia la página
 

@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { useState, useRef } from "react";
 import Tesseract from "tesseract.js";
@@ -67,3 +67,4 @@ export default function capturarDatos() {
     </div>
   );
 }
+ */
