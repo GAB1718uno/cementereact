@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const obtenerFallecidoPorId = async (id: string): Promise<SimpleFallecido> => {
   try {
     const fallecidoIndividual = await fetch(
-      `http://localhost:4000/api/muertos/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/muertos/${id}`,
       {
         cache: "no-store",
       }
@@ -55,7 +55,7 @@ const obtenerFallecidosRelacionados = async (
 ): Promise<SimpleFallecido[]> => {
   try {
     const fallecidosRelacionados = await fetch(
-      `http://localhost:4000/api/muertos/${id}/${sepult}/${sepulturaId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/muertos/${id}/${sepult}/${sepulturaId}`,
       {
         cache: "no-store",
       }

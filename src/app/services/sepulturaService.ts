@@ -1,6 +1,8 @@
 // src/services/sepulturas.ts
 import { Sepultura } from '@/components/interfaces/sepulturas';
 import { fetchWithAuth } from './apiService';
+import { SimpleFallecido } from '@/components';
+import { log } from 'console';
 
 export const buscarSepulturas = async (termino: string) => {
   
@@ -54,4 +56,31 @@ export const eliminarSepultura = async (id: string): Promise<void> => {
 export const obtenerSepulturasCribadas = async (termino: string): Promise<Sepultura[]> => {
   const response = await fetch(`${baseUrl}/sepulturas/busqueda/${termino}`);
   return await response.json();
+};
+
+
+
+// app/services/fallecidoService.ts
+
+
+export const obtenerFallecidosPorSepultura = async (
+  calle: string, 
+  numero: string
+): Promise<SimpleFallecido[]> => {
+  const res = await fetch(
+    `${baseUrl}/muertos/sepultura/relacionados/${
+      encodeURIComponent(calle)
+    }/${
+      encodeURIComponent(numero)
+    }`
+  );
+
+  console.log(baseUrl)
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.error || 'Error al obtener fallecidos');
+  }
+
+  return res.json();
 };

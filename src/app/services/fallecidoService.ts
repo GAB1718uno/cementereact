@@ -26,7 +26,7 @@ export const obtenerFallecidoPorApellidoYNombre = async (
   ): Promise<SimpleFallecido[] | undefined> => {
     try {
       // Asegúrate de que tanto 'nombre' como 'apellidos' tengan valores válidos.
-      const url = `http://localhost:4000/api/muertos/busqueda/${encodeURIComponent(nombre)}/${encodeURIComponent(apellidos)}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/muertos/busqueda/${encodeURIComponent(nombre)}/${encodeURIComponent(apellidos)}`;
       const response = await fetch(url, {
         cache: "no-store",
       });
@@ -49,7 +49,7 @@ export const obtenerFallecidos = async (
 ): Promise<SimpleFallecido[]> => {
   try {
     // Construye la URL con los parámetros de paginación
-    const url = `http://localhost:4000/api/muertos/${pageSize}/${page}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/muertos/${pageSize}/${page}`;
     console.log("URL de la solicitud:", url); // Depura la URL
 
     // Realiza la solicitud a la API

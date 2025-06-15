@@ -4,11 +4,10 @@ import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Sepultura } from '@/components/interfaces/sepulturas'
-import { obtenerSepultura } from '@/app/services/sepulturaService'
-import { FallecidoCard, FallecidoGrid, SimpleFallecido } from '@/components'
+import { obtenerFallecidosPorSepultura, obtenerSepultura } from '@/app/services/sepulturaService'
+import { FallecidoCard, SimpleFallecido } from '@/components'
 import Image from 'next/image'
 import GuardarSepultura from '@/components/sepulturas/sepulturaCoordenadas'
-
 
 export default function SepulturaDetallePage() {
   const params = useParams()
@@ -21,33 +20,20 @@ export default function SepulturaDetallePage() {
   const [error, setError] = useState<string | null>(null)
   const [fallecidosError, setFallecidosError] = useState<string | null>(null)
 
-  // Función para obtener los fallecidos de esta sepultura
-  
-console.log (sepultura)
-
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
-
-  const fetchFallecidosPorSepultura = async (calle: string, numero: string) => {
+  const cargarFallecidos = async (calle: string, numero: string) => {
     try {
-      const res = await fetch(`${baseUrl}/muertos/sepultura/relacionados/${encodeURIComponent(calle)}/${encodeURIComponent(numero)}`);
-      
-      
-      console.log(res)
-      
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || 'Error al obtener fallecidos');
-      }
-      
-      const data = await res.json();
-      setFallecidos(data);
-      
-    } catch (error: any) {
-      console.error('Error:', error);
-      setError(error.message);
+      const data = await obtenerFallecidosPorSepultura(calle, numero)
+      setFallecidos(data)
+      setFallecidosError(null)
+    } catch (error) {
+      setFallecidos([])
+      setFallecidosError(
+        error instanceof Error 
+          ? error.message 
+          : 'Error desconocido al cargar fallecidos'
+      )
     }
-  };
-
+  }
 
   useEffect(() => {
     if (!id) {
@@ -56,31 +42,27 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
       return
     }
 
-    const fetchData = async () => {
+    const cargarDatos = async () => {
       try {
         setLoading(true)
-        
-        // Hacer ambas llamadas en paralelo si es posible
-        const [sepulturaData] = await Promise.all([
-          obtenerSepultura(id),
-        ])
-        
+        const sepulturaData = await obtenerSepultura(id)
         setSepultura(sepulturaData)
         
         if (sepulturaData) {
-          await fetchFallecidosPorSepultura(sepulturaData.calle!, sepulturaData.numero!)
+          await cargarFallecidos(sepulturaData.calle!, sepulturaData.numero!)
         }
         
         setError(null)
       } catch (err) {
         console.error('Error cargando datos:', err)
         setError(err instanceof Error ? err.message : 'Error al cargar los detalles')
+        setFallecidos([])
       } finally {
         setLoading(false)
       }
     }
 
-    fetchData()
+    cargarDatos()
   }, [id])
 
   if (loading) {
@@ -121,49 +103,28 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
     )
   }
 
-  /* const fallecidos1 = fetchFallecidosPorSepultura(Number(sepultura.id))
-  console.log(JSON.stringify(fallecidos1))
- */
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        {/* Encabezado */}
         <div className="bg-teal-500 text-white p-4">
           <h1 className="text-2xl font-bold">{sepultura.calle}</h1>
           <p className="text-lg">{sepultura.numero}</p>
         </div>
 
-        {/* Contenido */}
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Imagen - Usando el componente Image de Next.js */}
-          {/* <div className="flex justify-center">
-  {sepultura.avatar && (
-    <div className="relative w-full min-w-[200px]">
-      <Image
-        src={sepultura.avatar}
-        alt={`Sepultura ${sepultura.calle}`}
-        fill
-        className="object-cover rounded-lg shadow-md"
-        sizes="(max-width: 768px) 100vw, 50vw"
-      />
-    </div>
-  )}
-</div> */}
+          <div className="flex justify-center">
+            {sepultura.avatar && (
+              <Image
+                src={sepultura.avatar}
+                alt={`Sepultura ${sepultura.calle}`}
+                width={0} 
+                height={0} 
+                sizes="100vw"
+                className="w-auto h-auto max-w-full rounded-lg shadow-md"
+              />
+            )}
+          </div>
 
-<div className="flex justify-center">
-  {sepultura.avatar && (
-    <Image
-      src={sepultura.avatar}
-      alt={`Sepultura ${sepultura.calle}`}
-      width={0} 
-      height={0} 
-      sizes="100vw"
-      className="w-auto h-auto max-w-full rounded-lg shadow-md"
-    />
-  )}
-</div>
-
-          {/* Detalles */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Detalles</h2>
             <div className="space-y-3">
@@ -179,7 +140,6 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
           </div>
         </div>
 
-        {/* Sección de fallecidos relacionados */}
         <div className="mt-8 bg-white shadow-md rounded-lg overflow-hidden">
           <div className="bg-teal-500 text-white p-4">
             <h2 className="text-xl font-bold">Fallecidos en esta sepultura</h2>
@@ -188,28 +148,26 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
           <div className="p-4">
             {fallecidosError ? (
               <div className="text-red-500">{fallecidosError}</div>
-            )
-            
-            :
-            
-            fallecidos.length > 0 ? (
+            ) : fallecidos.length > 0 ? (
               <div>
                 <h3>Fallecidos encontrados: {fallecidos.length}</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {fallecidos.map(fallecido => (
-                    
-                      <FallecidoCard key={fallecido.id} fallecidos={fallecido} onToggleFavorite={()=>{}} onDelete={()=>{}} />    
+                    <FallecidoCard 
+                      key={fallecido.id} 
+                      fallecidos={fallecido} 
+                      onToggleFavorite={() => {}} 
+                      onDelete={() => {}} 
+                    />    
                   ))}
                 </div>
               </div>
-            )
-             : (
+            ) : (
               <p className="text-gray-500">No hay fallecidos registrados en esta sepultura</p>
             )}
           </div>
         </div>
 
-        {/* Pie de página con acciones */}
         <div className="bg-gray-50 px-4 py-3 flex justify-between">
           <button
             onClick={() => router.back()}
@@ -218,9 +176,12 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
             Volver
           </button>
 
-            <GuardarSepultura onCoordinatesObtained={function (coords: { lat: number; lng: number }): void {
-            throw new Error('Function not implemented.')
-          } } />
+          <GuardarSepultura 
+            onCoordinatesObtained={(coords: { lat: number; lng: number }) => {
+              // Implementa esta función según tus necesidades
+              console.log('Coordenadas obtenidas:', coords)
+            }} 
+          />
 
           <Link
             href={`/sepulturas/editar/${sepultura.id}`}
@@ -233,3 +194,4 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
     </div>
   )
 }
+
