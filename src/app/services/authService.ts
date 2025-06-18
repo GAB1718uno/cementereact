@@ -22,7 +22,7 @@ const AuthService = {
   async login(email: string, password: string): Promise<boolean | string> {
     
     try {
-      const res = await fetch(`${BASE_URL}/usuarios`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usuarios`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -118,7 +118,7 @@ export async function registerUser(
   rol: string,
   estado: number
 ) {
-  const url = "http://localhost:4000/api/usuarios/nuevo"
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/usuarios/nuevo`
   //const url = `${process.env.NEXT_PUBLIC_API_URL}/usuarios/nuevo`;
   const body = { usuario, password, email, rol, estado };
 
