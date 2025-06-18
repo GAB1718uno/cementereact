@@ -22,7 +22,8 @@ interface TooltipInfo {
 export default function CemeteryMapPage() {
   const mapRef = useRef<any>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
-  const [viewState, setViewState] = useState({ latitude: 38.33419, longitude: -0.77642, zoom: 18 });
+  const [fidSelected, setFidSelected] = useState<number | null>(null);
+  const [viewState, setViewState] = useState({ latitude: 38.33419, longitude: -0.77642, zoom: 16 });
   const [layoutData, setLayoutData] = useState<GeoJSON.FeatureCollection | null>(null);
   const [caminosData, setCaminosData] = useState<GeoJSON.FeatureCollection | null>(null);
   const [tooltipInfo, setTooltipInfo] = useState<TooltipInfo | null>(null);
@@ -40,7 +41,7 @@ export default function CemeteryMapPage() {
   }, []);
 
   useEffect(() => {
-  fetch('/caminos.geojson')
+  fetch('/caminos_geojson.geojson')
     .then(res => res.json())
     .then(data => setCaminosData(data))
     .catch(console.error);
@@ -68,6 +69,8 @@ export default function CemeteryMapPage() {
     const feature = event.features[0];
     if (feature && feature.layer?.id === 'cemetery-layer') {
       const properties = feature.properties as GraveFeatureProperties;
+      //Guardamos el FID seleccionado
+      setFidSelected(properties.fid);
       const nuevaCalle = properties.calle || '';
       const nuevoNumero = properties.numero || '';
 
@@ -108,7 +111,7 @@ export default function CemeteryMapPage() {
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         onClick={handleMapClick}
-        mapStyle="mapbox://styles/mapbox/light-v10"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         interactiveLayerIds={['cemetery-layer']}
         style={{ width: '100%', height: '100%' }}
@@ -117,15 +120,58 @@ export default function CemeteryMapPage() {
           <Layer
             id="cemetery-layer"
             type="fill"
+
             paint={{
-              'fill-color': '#888',
-              'fill-opacity': 0.4,
-              'fill-outline-color': '#000'
-            }}
+    'fill-color': [
+      'case',
+      ['==', ['get', 'fid'], fidSelected || -1],
+      '#ff5252',  // Color seleccionado
+      '#e0e0e0'   // Color normal
+    ],
+    'fill-opacity': [
+      'case',
+      ['==', ['get', 'fid'], fidSelected || -1],
+      0.8,  // Opacidad seleccionada
+      0.5   // Opacidad normal
+    ],
+    'fill-outline-color': [
+      'case',
+      ['==', ['get', 'fid'], fidSelected || -1],
+      '#ff0000', // Borde seleccionado
+      '#bdbdbd'  // Borde normal
+    ],
+    /* 'fill-outline-width': [
+      'case',
+      ['==', ['get', 'fid'], selectedFid || -1],
+      2,  // Borde grueso seleccionado
+      1   // Borde fino normal
+    ] */
+  }}
+            /* paint={{
+      // CONDICIÓN PRINCIPAL
+      'fill-color': [
+        'case',
+        ['==', ['get', 'fid'], tooltipInfo?.properties?.fid || -1], // Condición
+        '#ff5252',  // Color sepultura seleccionada (rojo claro)
+        '#e0e0e0'   // Color sepulturas normales (gris claro)
+      ],
+      'fill-opacity': [
+        'case',
+        ['==', ['get', 'fid'], tooltipInfo?.properties?.fid || -1],
+        0.8,  // Opacidad alta para seleccionada
+        0.5   // Opacidad media para las demás
+      ],
+      'fill-outline-color': [
+        'case',
+        ['==', ['get', 'fid'], tooltipInfo?.properties?.fid || -1],
+        '#ff0000', // Borde rojo para seleccionada
+        '#bdbdbd'  // Borde gris para las demás
+      ]
+    }} */
           />
         </Source>
 
-        {caminosData && (
+        {/* {caminosData && ( */}
   <Source id="caminos-data" type="geojson" data={caminosData}>
     <Layer
       id="caminos-layer"
@@ -137,7 +183,7 @@ export default function CemeteryMapPage() {
       }}
     />
   </Source>
-)}
+{/* )} */}
       </Map>
 
       {tooltipInfo && (

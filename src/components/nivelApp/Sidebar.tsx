@@ -7,10 +7,10 @@ import UserHeader from "./userHeader";
 
 const menuItems = [
   {
-    path: "/dashboard/main",
+    path: "/dashboard/navegar",
     icon: <IoAppsSharp size={50} />,
-    title: "Principal",
-    subTitle: "Visión Global de los servicios",
+    title: "Mapa de Sepulturas",
+    subTitle: "Visión Global del cementerio",
   },
   {
     path: "/dashboard/favoritos",

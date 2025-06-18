@@ -58491,7 +58491,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6be",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "37"
       },
       "geometry": {
         "type": "LineString",
@@ -58536,7 +58538,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6bf",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San JUan Bautista",
+        "numero": "39A"
       },
       "geometry": {
         "type": "LineString",
@@ -58573,7 +58577,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c0",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "41"
       },
       "geometry": {
         "type": "LineString",
@@ -58610,7 +58616,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c1",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "39B"
       },
       "geometry": {
         "type": "LineString",
@@ -58647,7 +58655,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c2",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "45"
       },
       "geometry": {
         "type": "LineString",
@@ -58684,7 +58694,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c3",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "43"
       },
       "geometry": {
         "type": "LineString",
@@ -58721,7 +58733,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c4",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "47"
       },
       "geometry": {
         "type": "LineString",
@@ -58758,7 +58772,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6c5",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "35"
       },
       "geometry": {
         "type": "LineString",
@@ -59380,7 +59396,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6d5",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San JUan Bautista",
+        "numero": "3"
       },
       "geometry": {
         "type": "LineString",
@@ -59417,7 +59435,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6d6",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "1"
       },
       "geometry": {
         "type": "LineString",
@@ -59491,7 +59511,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6d8",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "6"
       },
       "geometry": {
         "type": "LineString",
@@ -59528,7 +59550,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6d9",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "10"
       },
       "geometry": {
         "type": "LineString",
@@ -59565,7 +59589,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6da",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "8"
       },
       "geometry": {
         "type": "LineString",
@@ -59602,7 +59628,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6db",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "14"
       },
       "geometry": {
         "type": "LineString",
@@ -59639,7 +59667,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6dc",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "12"
       },
       "geometry": {
         "type": "LineString",
@@ -59676,7 +59706,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6dd",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "16"
       },
       "geometry": {
         "type": "LineString",
@@ -60009,7 +60041,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6e6",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "2"
       },
       "geometry": {
         "type": "LineString",
@@ -60046,7 +60080,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6e7",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "4"
       },
       "geometry": {
         "type": "LineString",
@@ -60120,7 +60156,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6e9",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "22"
       },
       "geometry": {
         "type": "LineString",
@@ -60194,7 +60232,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6eb",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "18"
       },
       "geometry": {
         "type": "LineString",
@@ -60231,7 +60271,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6ec",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "20"
       },
       "geometry": {
         "type": "LineString",
@@ -60268,7 +60310,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6ed",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "24"
       },
       "geometry": {
         "type": "LineString",
@@ -60305,7 +60349,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6ee",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "26"
       },
       "geometry": {
         "type": "LineString",
@@ -60416,7 +60462,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6f1",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "28"
       },
       "geometry": {
         "type": "LineString",
@@ -60457,7 +60505,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6f2",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "30"
       },
       "geometry": {
         "type": "LineString",
@@ -60494,7 +60544,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6f3",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "32"
       },
       "geometry": {
         "type": "LineString",
@@ -60646,7 +60698,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "6f7",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "34"
       },
       "geometry": {
         "type": "LineString",
@@ -61669,7 +61723,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "712",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "67"
       },
       "geometry": {
         "type": "LineString",
@@ -61706,7 +61762,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "713",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "65"
       },
       "geometry": {
         "type": "LineString",
@@ -61743,7 +61801,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "714",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "71"
       },
       "geometry": {
         "type": "LineString",
@@ -61780,7 +61840,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "715",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "69"
       },
       "geometry": {
         "type": "LineString",
@@ -61940,7 +62002,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "719",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "61"
       },
       "geometry": {
         "type": "LineString",
@@ -61977,7 +62041,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "71a",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "59"
       },
       "geometry": {
         "type": "LineString",
@@ -62014,7 +62080,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "71b",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "63"
       },
       "geometry": {
         "type": "LineString",
@@ -66403,7 +66471,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "78c",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "55"
       },
       "geometry": {
         "type": "LineString",
@@ -66448,7 +66518,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "78d",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "53"
       },
       "geometry": {
         "type": "LineString",
@@ -66485,7 +66557,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "78e",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "49"
       },
       "geometry": {
         "type": "LineString",
@@ -66522,7 +66596,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "78f",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "51"
       },
       "geometry": {
         "type": "LineString",
@@ -66559,7 +66635,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "790",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "57"
       },
       "geometry": {
         "type": "LineString",
@@ -66596,7 +66674,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "791",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "36"
       },
       "geometry": {
         "type": "LineString",
@@ -66633,7 +66713,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "792",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "38"
       },
       "geometry": {
         "type": "LineString",
@@ -66674,7 +66756,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "793",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "40"
       },
       "geometry": {
         "type": "LineString",
@@ -66719,7 +66803,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "794",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "42A"
       },
       "geometry": {
         "type": "LineString",
@@ -66756,7 +66842,9 @@
         "SubClasses": "AcDbEntity:AcDbPolyline",
         "Linetype": null,
         "EntityHandle": "795",
-        "Text": null
+        "Text": null,
+        "calle": "Calle San Juan Bautista",
+        "numero": "42B"
       },
       "geometry": {
         "type": "LineString",
@@ -67478,6 +67566,45 @@
           [
             -0.776165828903728,
             38.33608421108226
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "fid": 1705,
+        "Layer": "Capa_1",
+        "PaperSpace": null,
+        "SubClasses": "AcDbEntity:AcDbPolyline",
+        "Linetype": null,
+        "EntityHandle": "7a8",
+        "Text": null,
+        "calle": "Calle Humildad",
+        "numero": "Grupo 19 Ayuntamiento"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -0.776275303424585,
+            38.33496036454723
+          ],
+          [
+            -0.77625977603932,
+            38.33509370925491
+          ],
+          [
+            -0.776224944225002,
+            38.3350908323432
+          ],
+          [
+            -0.776240543286029,
+            38.33495741677664
+          ],
+          [
+            -0.776275303424585,
+            38.33496036454723
           ]
         ]
       }
