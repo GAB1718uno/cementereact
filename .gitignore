@@ -7,8 +7,6 @@
 /build
 
 # Configuración local
-.env*
-.env.local
 .vercel
 
 # Sistemas operativos
