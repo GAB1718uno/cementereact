@@ -1,5 +1,5 @@
 // src/services/api.ts
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://cementerio.com.es:4000/api';
 
 export const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
   const token = localStorage.getItem("token");

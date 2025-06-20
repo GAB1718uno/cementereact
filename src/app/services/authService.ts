@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api"; // Ajusta según tu configuración
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://cementerio.com.es:4000/api"; // Ajusta según tu configuración
 
 export interface User {
   usuario: string;
