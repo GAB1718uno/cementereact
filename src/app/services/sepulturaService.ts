@@ -24,7 +24,7 @@ export const buscarSepulturas = async (termino: string) => {
 };
 
 // app/services/sepulturaService.ts
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api'
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://cementerio.com.es:4000/api'
 
 export const obtenerSepulturas = async (): Promise<Sepultura[]> => {
   const response = await fetch(`${baseUrl}/sepulturas`);

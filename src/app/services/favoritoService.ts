@@ -1,10 +1,9 @@
 // services/favoritesService.js
-const API_URL = 'http://localhost:4000/favorites';
 const userId = localStorage.getItem("userId");
 
 export const getFavorites = async (/* userId */) => {
   try {
-    const response = await fetch(`${API_URL}/${userId}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${userId}`);
     if (!response.ok) throw new Error('Error al obtener favoritos');
     return await response.json();
   } catch (error) {
@@ -16,7 +15,7 @@ export const getFavorites = async (/* userId */) => {
 // Nueva función para eliminar un favorito
 export const removeFavorite = async (/* userId, deceasedId */) => {
   try {
-    const response = await fetch(`${API_URL}/remove`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/remove`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({/*  userId, deceasedId */ })

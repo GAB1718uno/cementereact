@@ -59,8 +59,10 @@ if (token) {
 }
 
       console.log("Este es el token en el frontend: "+token)
+      console.log("Token:", token);
+console.log("Payload:", JSON.parse(atob(token!.split(".")[1])));
 
-      const response = await fetch(`http://localhost:4000/api/favoritos/${fallecidoId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/favoritos/${fallecidoId}`, {
         method: "PUT", // Cambia a PUT
         headers: {
           "Content-Type": "application/json",
