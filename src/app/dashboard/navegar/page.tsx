@@ -118,10 +118,10 @@ export default function CemeteryMapPage() {
         //mapLib={mapboxgl}
         onMove={(evt) => setViewState(evt.viewState)}
         onClick={handleMapClick}
-        mapStyle="https://api.mapbox.com/styles/v1/mapbox/light-v11?pluginName=cementereact"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         //mapStyle="https://demotiles.maplibre.org/style.json"
 
-        //mapboxAccessToken="pk.eyJ1IjoiZ2lsc29uYmJzIiwiYSI6ImNsd2psdGI0MzA0ZzQyaXA4bWtoNmlqcWcifQ.kCZlyBYyChNn7VjeqaPEqg"
+        //mapboxAccessToken="pk.eyJ1IjoiZ2lsc29uYmJzIiwiYSI6ImNtYzZqbzZiZDBweTYyanFzN2poYjhsdXoifQ._NdTz5queZYMzA-YTLexeA"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         interactiveLayerIds={['cemetery-layer']}
         style={{ width: '100%', height: '100%' }}
