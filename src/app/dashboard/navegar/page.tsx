@@ -111,7 +111,8 @@ export default function CemeteryMapPage() {
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         onClick={handleMapClick}
-        mapStyle="mapbox://styles/mapbox/light-v11"
+        //mapStyle="mapbox://styles/mapbox/light-v11"
+        mapStyle="https://demotiles.maplibre.org/style.json"
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         interactiveLayerIds={['cemetery-layer']}
         style={{ width: '100%', height: '100%' }}
