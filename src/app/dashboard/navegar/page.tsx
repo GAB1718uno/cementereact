@@ -113,7 +113,9 @@ export default function CemeteryMapPage() {
         onClick={handleMapClick}
         mapStyle="mapbox://styles/mapbox/light-v10"
         //mapStyle="https://demotiles.maplibre.org/style.json"
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+
+        mapboxAccessToken="pk.eyJ1IjoiZ2lsc29uYmJzIiwiYSI6ImNsd2psdGI0MzA0ZzQyaXA4bWtoNmlqcWcifQ.kCZlyBYyChNn7VjeqaPEqg"
+        //mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
         interactiveLayerIds={['cemetery-layer']}
         style={{ width: '100%', height: '100%' }}
       >
