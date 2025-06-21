@@ -5,6 +5,12 @@ import Map, { MapLayerMouseEvent, Source, Layer } from 'react-map-gl';
 import "../../../../node_modules/mapbox-gl/dist/mapbox-gl.css"
 import { obtenerFallecidosPorSepultura } from '@/app/services/sepulturaService';
 import { FallecidoGrid, SimpleFallecido } from '@/components';
+import mapboxgl from 'mapbox-gl';
+
+
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+
+mapboxgl.accessToken = MAPBOX_TOKEN || '';
 
 interface GraveFeatureProperties {
   fid: number;
@@ -109,9 +115,10 @@ export default function CemeteryMapPage() {
       <Map
         ref={mapRef}
         {...viewState}
+        mapLib={mapboxgl}
         onMove={(evt) => setViewState(evt.viewState)}
         onClick={handleMapClick}
-        mapStyle="mapbox://styles/mapbox/light-v10"
+        mapStyle="mapbox://styles/mapbox/light-v11"
         //mapStyle="https://demotiles.maplibre.org/style.json"
 
         mapboxAccessToken="pk.eyJ1IjoiZ2lsc29uYmJzIiwiYSI6ImNsd2psdGI0MzA0ZzQyaXA4bWtoNmlqcWcifQ.kCZlyBYyChNn7VjeqaPEqg"
